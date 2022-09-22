@@ -5,6 +5,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  margin-bottom: 35px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -26,11 +27,16 @@
 
 section {
   width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 section div {
   display: flex;
   margin-top: 20px;
+  width: 100%;
 }
 
 section div button {
