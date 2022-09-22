@@ -1,32 +1,34 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, "../src/index.js"),
+  entry: path.resolve(__dirname, '../src/index.tsx'),
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|js)x?$/,
         exclude: [/\.html$/, /\.json$/, /\.ejs$/, /node_modules/],
-        use: ["babel-loader"],
+        use: ['babel-loader'],
       },
-      { test: /\.css$/, use: ["style-loader", "css-loader"] },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       {
         test: /\.(png|jpg|svg)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
           },
         ],
       },
     ],
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx"],
+    extensions: ['.tsx', '.ts', '.js'],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
+  plugins: [new HtmlWebpackPlugin({ template: './public/index.html' })],
   devServer: {
-    static: path.resolve(__dirname, "../public"),
+    static: path.resolve(__dirname, '../public'),
     compress: true,
     port: 8000,
     open: true,

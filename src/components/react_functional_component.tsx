@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { Results } from "./react_component";
-import { Title } from "./react_pure_component";
-import { Logo } from "./react_create_element";
+import React, { useState, useEffect } from 'react';
+import { Results } from './react_component';
+import { Title } from './react_pure_component';
+import { Logo } from './react_create_element';
 
 export const HomeTask1 = () => {
-  const [list, setList] = useState([]);
-  const [results, setResults] = useState([]);
-  const [text, setText] = useState("");
+  const [list, setList] = useState<string[]>([]);
+  const [results, setResults] = useState<string[]>([]);
+  const [text, setText] = useState('');
 
   const add = () => {
-    if (text !== "") {
+    if (text !== '') {
       setList((list) => [...list, text]);
-      setText("");
+      setText('');
     }
   };
 
   useEffect(() => {
-    if (text !== "") {
+    if (text !== '') {
       const res = list.filter((element) => {
         return element.includes(text);
       });
@@ -24,7 +24,7 @@ export const HomeTask1 = () => {
     } else {
       setResults(list);
     }
-  }, [text]);
+  }, [text, list]);
 
   useEffect(() => {
     setResults(list);

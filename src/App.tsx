@@ -1,6 +1,6 @@
-import React from "react";
-import "./App.css";
-import { HomeTask1 } from "./components/react_functional_component";
+import React from 'react';
+import './App.css';
+import { HomeTask1 } from './components/react_functional_component';
 
 function App() {
   return (
