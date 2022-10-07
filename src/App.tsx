@@ -1,8 +1,8 @@
-import React from "react";
-import { HomePage } from "./ui";
-import ErrorBoundary from "./shared/Error";
+import React from 'react';
+import { HomePage } from './ui';
+import ErrorBoundary from './shared/Error';
 
-export default () => {
+const App = () => {
   return (
     <div>
       <ErrorBoundary>
@@ -11,3 +11,5 @@ export default () => {
     </div>
   );
 };
+
+export default App;

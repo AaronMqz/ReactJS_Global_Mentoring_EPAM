@@ -1,7 +1,11 @@
-import styled from "styled-components";
-import { ThemeColor } from "../../utils/constants";
+import styled from 'styled-components';
+import { ThemeColor } from '../../utils/constants';
 
-const ListContainer = styled.div`
+type Props = {
+  hover: boolean;
+};
+
+const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 0 45px;
@@ -9,7 +13,7 @@ const ListContainer = styled.div`
   background: ${ThemeColor.Secondary};
 `;
 
-const Container = styled.div`
+const Card = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
@@ -59,7 +63,7 @@ const Year = styled.div`
   font-size: 14px;
 `;
 
-const Menu = styled.span`
+const MenuIcon = styled.span<Props>`
   display: flex;
   border-radius: 50%;
   background: ${ThemeColor.Secondary};
@@ -71,16 +75,17 @@ const Menu = styled.span`
   top: 20px;
   right: 15px;
   color: white;
+  ${(props) => (props.hover ? 'display:flex' : 'display:none')}
 `;
 
 export default {
-  ListContainer,
   Container,
+  Card,
   Poster,
   Content,
   TitleContent,
   Title,
   Tagline,
   Year,
-  Menu,
+  MenuIcon,
 };

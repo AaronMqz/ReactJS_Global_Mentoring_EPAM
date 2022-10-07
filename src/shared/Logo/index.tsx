@@ -1,10 +1,12 @@
-import React from "react";
-import Logo from "./Logo.styled";
+import React from 'react';
+import Logo from './Logo.styled';
 
-export default () => {
+const LogoComponent = () => {
   return (
     <Logo.Strong>
       netflix<Logo.Normal>roulette</Logo.Normal>
     </Logo.Strong>
   );
 };
+
+export default LogoComponent;

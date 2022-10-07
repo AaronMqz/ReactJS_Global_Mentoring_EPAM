@@ -1,11 +1,15 @@
-import React, { ErrorInfo } from "react";
-import Error from "./Error.styled";
+import React, { ErrorInfo, ReactNode } from 'react';
+import Error from './Error.styled';
 
 type ErrorProps = {
-  children: any;
+  children: ReactNode;
 };
 
-export default class ErrorBoundary extends React.Component<ErrorProps, any> {
+type State = {
+  hasError: boolean;
+};
+
+export default class ErrorBoundary extends React.Component<ErrorProps, State> {
   constructor(props: ErrorProps) {
     super(props);
     this.state = { hasError: false };
@@ -15,7 +19,7 @@ export default class ErrorBoundary extends React.Component<ErrorProps, any> {
     this.setState({
       hasError: true,
     });
-    console.error("Uncaught error:", error, errorInfo);
+    console.error('Uncaught error:', error, errorInfo);
   }
 
   render() {

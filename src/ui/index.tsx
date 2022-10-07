@@ -1,14 +1,14 @@
-import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import ContenList from "./ContentList";
-import { mockData } from "../service/mockData";
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import MovieList from './MovieList';
+import { mockData } from '../service/mockData';
 
 export const HomePage = () => {
   return (
     <>
       <Header />
-      <ContenList items={mockData.data} />
+      <MovieList movies={mockData.data} />
       <Footer />
     </>
   );
