@@ -1,15 +1,13 @@
-import React from 'react';
-import './App.css';
-import { HomeTask1 } from './components/react_functional_component';
+import React from "react";
+import { HomePage } from "./ui";
+import ErrorBoundary from "./shared/Error";
 
-function App() {
+export default () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <HomeTask1 />
-      </header>
+    <div>
+      <ErrorBoundary>
+        <HomePage />
+      </ErrorBoundary>
     </div>
   );
-}
-
-export default App;
+};
