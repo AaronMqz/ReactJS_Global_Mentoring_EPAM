@@ -1,17 +1,46 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Input from "./Input.styled";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import { ThemeColor } from '../../utils/constants';
+import { Input, Icon, InputWrapper } from './Input.styled';
 
 type InputProps = {
   placeholder: string;
+  onChange: (params: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+  value?: string | number;
 };
 
-const InputComponent = ({ placeholder }: InputProps) => {
-  return <Input placeholder={placeholder} />;
+const Date = ({ placeholder, onChange, name, value }: InputProps) => {
+  return (
+    <InputWrapper>
+      <Input
+        type="date"
+        placeholder={placeholder}
+        onChange={onChange}
+        name={name}
+        value={value}
+      />
+      <Icon>
+        <FontAwesomeIcon icon={faCalendarDays} color={ThemeColor.Primary} />
+      </Icon>
+    </InputWrapper>
+  );
 };
 
-InputComponent.propTypes = {
-  placeholder: PropTypes.string,
+const Text = ({ placeholder, onChange, name, value }: InputProps) => {
+  return (
+    <Input
+      type="text"
+      placeholder={placeholder}
+      onChange={onChange}
+      name={name}
+      value={value}
+    />
+  );
 };
 
-export default InputComponent;
+export default {
+  Text,
+  Date,
+};

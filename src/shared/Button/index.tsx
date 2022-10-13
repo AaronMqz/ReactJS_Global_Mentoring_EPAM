@@ -1,28 +1,27 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Button from "./Button.styled";
+import React from 'react';
+import Button from './Button.styled';
 
-type ButtonProps = {
-  text: string;
+type ButtonProps = React.PropsWithChildren<{
+  onClick?: () => void;
+}>;
+
+const typedButton = {
+  Primary: (props: ButtonProps) => <Button.Primary {...props} />,
+  Secondary: (props: ButtonProps) => <Button.Secondary {...props} />,
+  Add: (props: ButtonProps) => <Button.Add {...props} />,
 };
 
-const Primary = ({ text }: ButtonProps) => {
-  return <Button.Primary>{text}</Button.Primary>;
+const wrapper = (type: string, props: ButtonProps) => {
+  const Wrapper = typedButton[type as keyof typeof typedButton];
+  return <>{<Wrapper onClick={props.onClick}>{props.children}</Wrapper>}</>;
 };
 
-const Add = ({ text }: ButtonProps) => {
-  return <Button.Add>{text}</Button.Add>;
-};
-
-Primary.prototype = {
-  text: PropTypes.string.isRequired,
-};
-
-Add.prototype = {
-  text: PropTypes.string.isRequired,
-};
+const Primary = (props: ButtonProps) => wrapper('Primary', props);
+const Secondary = (props: ButtonProps) => wrapper('Secondary', props);
+const Add = (props: ButtonProps) => wrapper('Add', props);
 
 export default {
   Primary,
+  Secondary,
   Add,
 };

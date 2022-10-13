@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import movies from "../../assets/movies.png";
+import styled from 'styled-components';
+import movies from '../../assets/movies.png';
 
 const Title = styled.label`
   font-size: 40px;
@@ -29,7 +29,7 @@ const BackgroundImage = styled.div`
   width: 100%;
   z-index: -1;
   left: 0;
-  top: 0;
+  top: -2px;
 `;
 
 const Top = styled.div`

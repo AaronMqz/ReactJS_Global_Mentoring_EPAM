@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ThemeColor } from "../../../utils/constants";
+import styled from 'styled-components';
+import { ThemeColor } from '../../../utils/constants';
 
 const Container = styled.div`
   display: flex;

@@ -1,4 +1,3 @@
-declare module "*.png" {
-  const path: string;
-  export default path;
-}
+declare module '*.png';
+
+declare module '@fortawesome/free-solid-svg-icons';

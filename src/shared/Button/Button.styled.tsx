@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ThemeColor } from "../../utils/constants";
+import styled from 'styled-components';
+import { ThemeColor } from '../../utils/constants';
 
 const Primary = styled.div`
   border-radius: 2px;
@@ -10,9 +10,15 @@ const Primary = styled.div`
   background: ${ThemeColor.Primary};
   color: white;
   font-size: 16px;
-  padding: 5px;
+  padding: 10px;
   margin-left: 10px;
   width: 150px;
+`;
+
+const Secondary = styled(Primary)`
+  background: ${ThemeColor.Secondary};
+  border: solid 1px ${ThemeColor.Primary};
+  color: ${ThemeColor.Primary};
 `;
 
 const Add = styled(Primary)`
@@ -23,5 +29,6 @@ const Add = styled(Primary)`
 
 export default {
   Primary,
+  Secondary,
   Add,
 };
