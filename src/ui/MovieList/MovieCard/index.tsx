@@ -1,9 +1,9 @@
-import React, { useState, useCallback } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { getYear } from "../../../utils";
-import Movie from "./MovieCard.styled";
-import ContextMenu from "../ContextMenu";
+import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
+import { getYear } from '../../../utils';
+import Movie from './MovieCard.styled';
+import ContextMenu from '../ContextMenu';
 
 type MovieProps = {
   movie: MovieItem;

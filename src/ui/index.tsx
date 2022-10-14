@@ -1,11 +1,13 @@
-import React, { useState, useCallback } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import MovieList from "./MovieList";
-import MovieCard from "./MovieList/MovieCard";
-import Filter from "./Filter";
-import { mockData } from "../service/mockData";
-import { initialMovieState } from "../utils/constants";
+/* eslint-disable react/no-children-prop */
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useCallback } from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import MovieList from './MovieList';
+import MovieCard from './MovieList/MovieCard';
+import Filter from './Filter';
+import { mockData } from '../service/mockData';
+import { initialMovieState } from '../utils/constants';
 
 export const HomePage = () => {
   const [movieSelected, setMovieSelected] = useState(
