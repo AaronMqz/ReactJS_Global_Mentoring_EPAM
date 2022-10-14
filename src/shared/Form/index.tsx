@@ -1,34 +1,39 @@
-import React, { useState } from 'react';
-import Form from './Form.styled';
-import Input from '../Input';
-import Button from '../Button';
-import DropDown from '../DropDown';
-import { Genres } from '../../utils/constants';
+import React, { useState } from "react";
+import Form from "./Form.styled";
+import Input from "../Input";
+import Button from "../Button";
+import DropDown from "../DropDown";
+import { Genres } from "../../utils/constants";
 
 type FormTypeProps = {
   titleForm: string;
   movie?: MovieItem;
-  onClick: (param: MovieItem) => void;
-  moviewIdToDelete?: number;
+  handleClick: () => void;
+  formType?: string;
 };
 
 const FormComponent = ({
   titleForm,
   movie,
-  onClick,
-  moviewIdToDelete,
+  handleClick,
+  formType,
 }: FormTypeProps) => {
   const [newMovieState, setNewMovieState] = useState(movie as MovieItem);
 
-  if (moviewIdToDelete) {
-    const handleDelete = () => onClick(newMovieState);
+  if (formType === "delete") {
+    const handleDeleteClick = (movie: MovieItem) => {
+      console.log("moview deleted: ", movie.title);
+      handleClick();
+    };
 
     return (
       <Form.Content>
         <Form.Title>{titleForm}</Form.Title>
         <Form.Message>Are you sure you want to delete this movie?</Form.Message>
         <Form.Footer>
-          <Button.Primary onClick={handleDelete}>{'CONFIRM'}</Button.Primary>
+          <Button.Primary onClick={() => handleDeleteClick(newMovieState)}>
+            {"CONFIRM"}
+          </Button.Primary>
         </Form.Footer>
       </Form.Content>
     );
@@ -59,7 +64,8 @@ const FormComponent = ({
   };
 
   const handleSubmit = () => {
-    onClick(newMovieState);
+    console.log("movie created or updated: ", newMovieState);
+    handleClick();
   };
 
   const handleChangeGenres = (items: Array<string>) => {
@@ -80,8 +86,8 @@ const FormComponent = ({
         <Form.RowItem>
           <Form.Label>TITLE</Form.Label>
           <Input.Text
-            name={'title'}
-            placeholder={'Title'}
+            name={"title"}
+            placeholder={"Title"}
             onChange={handleChange}
             value={title}
           />
@@ -89,8 +95,8 @@ const FormComponent = ({
         <Form.RowItem>
           <Form.Label>RELEASE DATE</Form.Label>
           <Input.Date
-            name={'release_date'}
-            placeholder={'Release Date'}
+            name={"release_date"}
+            placeholder={"Release Date"}
             onChange={handleChange}
             value={release_date}
           />
@@ -100,8 +106,8 @@ const FormComponent = ({
         <Form.RowItem>
           <Form.Label>MOVIE URL</Form.Label>
           <Input.Text
-            name={'poster_path'}
-            placeholder={'https://'}
+            name={"poster_path"}
+            placeholder={"https://"}
             onChange={handleChange}
             value={poster_path}
           />
@@ -109,8 +115,8 @@ const FormComponent = ({
         <Form.RowItem>
           <Form.Label>RATING</Form.Label>
           <Input.Text
-            name={'vote_average'}
-            placeholder={'Rating'}
+            name={"vote_average"}
+            placeholder={"Rating"}
             onChange={handleChange}
             value={vote_average}
           />
@@ -128,8 +134,8 @@ const FormComponent = ({
         <Form.RowItem>
           <Form.Label>RUNTIME</Form.Label>
           <Input.Text
-            name={'runtime'}
-            placeholder={'Minutes'}
+            name={"runtime"}
+            placeholder={"Minutes"}
             onChange={handleChange}
             value={runtime}
           />
@@ -140,15 +146,15 @@ const FormComponent = ({
           <Form.Label>OVERVIEW</Form.Label>
           <Form.TextArea
             name="overview"
-            placeholder={'Movie Description'}
+            placeholder={"Movie Description"}
             onChange={handleChangeTextArea}
             value={overview}
           />
         </Form.RowItem>
       </Form.Row>
       <Form.Footer>
-        <Button.Secondary onClick={handleReset}>{'RESET'}</Button.Secondary>
-        <Button.Primary onClick={handleSubmit}>{'SUBMIT'}</Button.Primary>
+        <Button.Secondary onClick={handleReset}>{"RESET"}</Button.Secondary>
+        <Button.Primary onClick={handleSubmit}>{"SUBMIT"}</Button.Primary>
       </Form.Footer>
     </Form.Content>
   );
