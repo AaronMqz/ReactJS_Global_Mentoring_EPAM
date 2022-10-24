@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ThemeColor } from '../../../utils/constants';
+import styled from "styled-components";
+import { ThemeColor } from "../../utils/constants";
 
 type Props = {
   active: boolean;

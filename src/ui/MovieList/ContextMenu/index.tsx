@@ -1,26 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import ContextMenu from './ContextMenu.styled';
+import React, { useState } from "react";
+import ContextMenu from "./ContextMenu.styled";
+import Modal, { useModal } from "../../../shared/Modal";
+import Form from "../../../shared/Form";
 
 type Props = {
-  handleClick: (params: string) => void;
+  movie: MovieItem;
 };
 
-const ContextMenuComponent = ({ handleClick }: Props) => {
+const ContextMenuComponent = ({ movie }: Props) => {
+  const [modalType, seetModalType] = useState("");
+  const { showModal, toogleModal } = useModal();
+
+  const handleClick = (formType: string) => {
+    toogleModal();
+    seetModalType(formType);
+  };
+
+  const handleFormType = () => {
+    const formTitles = {
+      edit: "EDIT MOVIE",
+      delete: "DELETE MOVIE",
+    };
+    const title = formTitles[modalType as keyof typeof formTitles];
+
+    return (
+      <Form
+        titleForm={title}
+        handleClick={toogleModal}
+        movie={movie}
+        formType={modalType}
+      />
+    );
+  };
+
   return (
-    <ContextMenu.Container>
-      <ContextMenu.Label onClick={() => handleClick('edit')}>
-        Edit
-      </ContextMenu.Label>
-      <ContextMenu.Label onClick={() => handleClick('delete')}>
-        Delete
-      </ContextMenu.Label>
-    </ContextMenu.Container>
+    <>
+      <ContextMenu.Container>
+        <ContextMenu.Label onClick={() => handleClick("edit")}>
+          Edit
+        </ContextMenu.Label>
+        <ContextMenu.Label onClick={() => handleClick("delete")}>
+          Delete
+        </ContextMenu.Label>
+      </ContextMenu.Container>
+      {showModal && <Modal toogle={toogleModal}>{handleFormType()}</Modal>}
+    </>
   );
-};
-
-ContextMenuComponent.propTypes = {
-  handleClick: PropTypes.func.isRequired,
 };
 
 export default ContextMenuComponent;

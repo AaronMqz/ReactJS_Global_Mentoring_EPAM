@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ThemeColor } from '../../utils/constants';
+import styled from "styled-components";
+import { ThemeColor } from "../../utils/constants";
 
 const Primary = styled.div`
   border-radius: 2px;
@@ -27,8 +27,17 @@ const Add = styled(Primary)`
   width: 125px;
 `;
 
+const Icon = styled(Primary)`
+  background: none;
+  color: ${ThemeColor.Primary};
+  font-size: 21px;
+  padding-top: 0px;
+  width: 21px;
+`;
+
 export default {
   Primary,
   Secondary,
   Add,
+  Icon,
 };

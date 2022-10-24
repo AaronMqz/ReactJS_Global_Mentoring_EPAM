@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes, { InferProps } from 'prop-types';
-import Filter from './Filter.styled';
-import SortBy from '../SortBy';
-import { getMoviesGenres } from '../../../utils';
-import { SortByList } from '../../../utils/constants';
+import React from "react";
+import PropTypes, { InferProps } from "prop-types";
+import Filter from "./Filter.styled";
+import SortBy from "./SortBy";
+import { getMoviesGenres } from "../../utils";
+import { SortByList } from "../../utils/constants";
 
 const propTypes = {
   items: PropTypes.arrayOf(
@@ -43,7 +43,7 @@ const FilterComponent = ({ items }: FilterProps) => {
 const FilterByGenres = ({ items }: FilterProps) => {
   return (
     <Filter.FilterContent>
-      <Filter.LabelFilter active={true}>{'ALL'}</Filter.LabelFilter>
+      <Filter.LabelFilter active={true}>{"ALL"}</Filter.LabelFilter>
       {getMoviesGenres(items as Array<MovieItem>).map((item, index) => {
         return (
           <Filter.LabelFilter active={false} key={index} id={item}>
@@ -73,4 +73,4 @@ const FilterCount = ({ items }: FilterProps) => {
   );
 };
 
-export default FilterComponent;
+export default React.memo(FilterComponent);
