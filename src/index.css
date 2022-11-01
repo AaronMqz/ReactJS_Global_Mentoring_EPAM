@@ -6,3 +6,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #555555;
 }
+.content {
+  overflow-y: scroll;
+  height: 100vh;
+  position: relative;
+}

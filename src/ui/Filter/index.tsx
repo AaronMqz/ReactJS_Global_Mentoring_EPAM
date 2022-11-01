@@ -1,52 +1,52 @@
-import React from "react";
-import PropTypes, { InferProps } from "prop-types";
-import Filter from "./Filter.styled";
-import SortBy from "./SortBy";
-import { getMoviesGenres } from "../../utils";
-import { SortByList } from "../../utils/constants";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect } from 'react';
+import Filter from './Filter.styled';
+import SortBy from './SortBy';
+import { Genres } from '../../utils/constants';
+import { SortByList } from '../../utils/constants';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import moviesSlices, { getMovies } from '../../redux/moviesSlice';
 
-const propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      poster_path: PropTypes.string,
-      title: PropTypes.string,
-      tagline: PropTypes.string,
-      release_date: PropTypes.string,
-      vote_count: PropTypes.number,
-      vote_average: PropTypes.number,
-      overview: PropTypes.string,
-      budget: PropTypes.number,
-      revenue: PropTypes.number,
-      genres: PropTypes.arrayOf(PropTypes.string),
-      runtime: PropTypes.number,
-    })
-  ),
-};
-
-type FilterProps = InferProps<typeof propTypes>;
-
-const FilterComponent = ({ items }: FilterProps) => {
+const FilterComponent = () => {
   return (
     <Filter.Container>
       <Filter.Section>
-        <FilterByGenres items={items} />
+        <FilterByGenres />
         <FilterSortBy />
       </Filter.Section>
       <Filter.Count>
-        <FilterCount items={items} />
+        <FilterCount />
       </Filter.Count>
     </Filter.Container>
   );
 };
 
-const FilterByGenres = ({ items }: FilterProps) => {
+const FilterByGenres = () => {
+  const dispatch = useAppDispatch();
+  const { filterBy } = useAppSelector((state) => state.movies);
+  const { filterByAction } = moviesSlices.actions;
+
+  const handleFilterBy = (e: any) => {
+    dispatch(filterByAction(e.target.id));
+  };
+
+  useEffect(() => {
+    dispatch(getMovies());
+  }, [dispatch, filterBy]);
+
   return (
     <Filter.FilterContent>
-      <Filter.LabelFilter active={true}>{"ALL"}</Filter.LabelFilter>
-      {getMoviesGenres(items as Array<MovieItem>).map((item, index) => {
+      <Filter.LabelFilter active={filterBy === ''} onClick={handleFilterBy}>
+        {'ALL'}
+      </Filter.LabelFilter>
+      {Genres.map((item, index) => {
         return (
-          <Filter.LabelFilter active={false} key={index} id={item}>
+          <Filter.LabelFilter
+            active={item === filterBy}
+            key={index}
+            id={item}
+            onClick={handleFilterBy}
+          >
             {item.toUpperCase()}
           </Filter.LabelFilter>
         );
@@ -59,15 +59,16 @@ const FilterSortBy = () => {
   return (
     <Filter.SortConatiner>
       <Filter.LabelSort>SORT BY</Filter.LabelSort>
-      <SortBy selectedText={SortByList[0].name} optionList={SortByList} />
+      <SortBy optionList={SortByList} />
     </Filter.SortConatiner>
   );
 };
 
-const FilterCount = ({ items }: FilterProps) => {
+const FilterCount = () => {
+  const { data } = useAppSelector((state) => state.movies);
   return (
     <>
-      <Filter.LabelCount>{items?.length}</Filter.LabelCount>
+      <Filter.LabelCount>{data.length}</Filter.LabelCount>
       <span>movies found</span>
     </>
   );

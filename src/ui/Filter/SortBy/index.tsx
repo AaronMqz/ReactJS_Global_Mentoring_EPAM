@@ -6,19 +6,31 @@ import DropDown from './SortBy.styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { ThemeColor } from '../../../utils/constants';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import moviesSlices, { getMovies } from '../../../redux/moviesSlice';
 
 type SortByProps = {
-  selectedText: string;
   optionList: Array<{ id: string; name: string }>;
 };
 
-const SortBy = ({ selectedText, optionList }: SortByProps) => {
+const SortBy = ({ optionList }: SortByProps) => {
   const [showList, setShowList] = useState(false);
   const ref = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
+  const { sortBy } = useAppSelector((state) => state.movies);
+  const { sortByAction } = moviesSlices.actions;
 
   const handleShowList = () => {
     setShowList(!showList);
   };
+
+  const handleSortBy = (e: any) => {
+    dispatch(sortByAction(e.target.id));
+  };
+
+  useEffect(() => {
+    dispatch(getMovies());
+  }, [sortBy]);
 
   useEffect(() => {
     const checkIfClickedOutside = (e: any) => {
@@ -35,7 +47,7 @@ const SortBy = ({ selectedText, optionList }: SortByProps) => {
   return (
     <DropDown.Container ref={ref} onClick={() => handleShowList()}>
       <DropDown.SelectedText>
-        {selectedText}
+        {optionList.find((item) => item.id === sortBy)?.name}
         <FontAwesomeIcon
           icon={showList ? faCaretUp : faCaretDown}
           color={ThemeColor.Primary}
@@ -46,7 +58,7 @@ const SortBy = ({ selectedText, optionList }: SortByProps) => {
         <DropDown.List>
           {optionList.map((item) => {
             return (
-              <DropDown.Item key={item.id} id={item.id}>
+              <DropDown.Item key={item.id} id={item.id} onClick={handleSortBy}>
                 {item.name}
               </DropDown.Item>
             );
@@ -58,7 +70,6 @@ const SortBy = ({ selectedText, optionList }: SortByProps) => {
 };
 
 SortBy.propTypes = {
-  selectedText: PropTypes.string.isRequired,
   optionList: PropTypes.arrayOf(
     PropTypes.shape({ id: PropTypes.string, name: PropTypes.string })
   ).isRequired,

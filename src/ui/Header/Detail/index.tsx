@@ -1,9 +1,10 @@
-import React from "react";
-import { Detail } from "./Detail.styled";
-import Logo from "../../../shared/Logo";
-import Button from "../../../shared/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import { Detail } from './Detail.styled';
+import Logo from '../../../shared/Logo';
+import Button from '../../../shared/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import img_error from '../../../assets/img_error.jpg';
 
 type detailProps = {
   movie: MovieItem;
@@ -21,6 +22,8 @@ const DetailComponent = ({ movie, handleClick }: detailProps) => {
     overview,
   } = movie;
 
+  const [imgNotFound, setImgNotFound] = useState(false);
+
   return (
     <>
       <Detail.Container>
@@ -31,14 +34,17 @@ const DetailComponent = ({ movie, handleClick }: detailProps) => {
           </Button.Icon>
         </Detail.Top>
         <Detail.Content>
-          <Detail.Poster src={poster_path} />
+          <Detail.Poster
+            onError={() => setImgNotFound(true)}
+            src={imgNotFound ? img_error : poster_path}
+          />
           <Detail.Description>
             <Detail.Group>
               <Detail.Title>{title}</Detail.Title>
               <Detail.Rating>{vote_average}</Detail.Rating>
             </Detail.Group>
             <Detail.SubTilte>
-              {genres.toString().replace(",", " & ")}
+              {genres.toString().replace(',', ' & ')}
             </Detail.SubTilte>
             <Detail.Group>
               <Detail.DateAndTime>{release_date}</Detail.DateAndTime>

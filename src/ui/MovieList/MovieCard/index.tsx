@@ -4,6 +4,7 @@ import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { getYear } from '../../../utils';
 import Movie from './MovieCard.styled';
 import ContextMenu from '../ContextMenu';
+import img_error from '../../../assets/img_error.png';
 
 type MovieProps = {
   movie: MovieItem;
@@ -14,16 +15,18 @@ const MovieComponent = ({ movie, handleClick }: MovieProps) => {
   const { poster_path, title, tagline, release_date } = movie;
   const [itemHover, setItemHover] = useState(false);
   const [menuHover, setMenuHover] = useState(false);
+  const [imgNotFound, setImgNotFound] = useState(false);
 
   return (
     <>
       <Movie.Card
         onMouseEnter={() => setItemHover(true)}
         onMouseLeave={() => setItemHover(false)}
+        onError={() => setImgNotFound(true)}
       >
         <Movie.Poster
           alt={title}
-          src={poster_path}
+          src={imgNotFound ? img_error : poster_path}
           onClick={() => handleClick(movie)}
         />
         <Movie.MenuIcon
