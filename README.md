@@ -1,5 +1,7 @@
 # React-Program-Epam
 
-# Task 1
+# Task 6
 
-# Pre-configured with WebPack
+- Integrate with the backend API
+- Redux toolkit
+- Infinite scroll

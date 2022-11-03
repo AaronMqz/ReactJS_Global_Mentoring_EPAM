@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ThemeColor } from "../../../utils/constants";
+import styled from 'styled-components';
+import { ThemeColor } from '../../../utils/constants';
 
 type Props = {
   hover: boolean;
@@ -15,11 +15,15 @@ const Card = styled.div`
   &:hover {
     transform: scale(1.05);
   }
+  width: 320px;
 `;
 
 const Poster = styled.img`
   width: 320px;
   margin-bottom: 20px;
+  min-height: 480px;
+  object-fit: contain;
+  background-color: #f3f3f3;
 `;
 
 const Content = styled.div`
@@ -67,7 +71,7 @@ const MenuIcon = styled.span<Props>`
   top: 20px;
   right: 15px;
   color: white;
-  ${(props) => (props.hover ? "display:flex" : "display:none")}
+  ${(props) => (props.hover ? 'display:flex' : 'display:none')}
 `;
 
 export default {

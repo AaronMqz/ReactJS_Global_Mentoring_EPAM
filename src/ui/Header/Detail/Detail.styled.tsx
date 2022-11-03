@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ThemeColor } from "../../../utils/constants";
+import styled from 'styled-components';
+import { ThemeColor } from '../../../utils/constants';
 
 const Container = styled.div`
   display: flex;
@@ -42,12 +42,14 @@ const Content = styled.div`
 const Poster = styled.img`
   width: 320px;
   margin-bottom: 20px;
+  object-fit: cover;
 `;
 
 const Description = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 40px;
+  width: 100%;
 `;
 
 const Rating = styled.div`
